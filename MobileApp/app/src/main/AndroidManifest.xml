@@ -32,6 +32,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="ru.ard.scanner.BarcodeCaptureActivity"
+            android:label="Read Barcode"/>
+
+        <activity android:name="ru.ard.warehousscanner.SettingsBarCodeActivity"
+            android:label="Settings BraCodeScanner"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity android:name="ru.ard.vnc.VncActivity"
+            android:label="VNC" />
+
+        <activity android:name="ru.ard.vnc.SettingsVncActivity"
+            android:label="Settings VNC"
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>
