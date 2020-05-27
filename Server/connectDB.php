@@ -1,5 +1,5 @@
 <?php
-
+//Если изменились настройки доступа к базе, то поменяйте файлы ниже:
 $mysql_host = 'localhost'; // sql сервер
 $mysql_user = 'root'; // пользователь
 $mysql_password = 'HardPass123'; // пароль
