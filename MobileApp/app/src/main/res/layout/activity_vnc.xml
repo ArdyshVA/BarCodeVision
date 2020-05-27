@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="ru.ard.warehousscanner.MainActivity">
+
+    <ImageButton
+        android:id="@+id/vnc_settings_btn"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="@null"
+        android:src="@drawable/settings" />
+
+    <TextView
+        android:id="@+id/vnc_barcode_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/vnc_use_flash"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/border"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="16sp"
+        tools:text="BARCODE_TYPE"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingRight="4dp"
+        android:paddingLeft="4dp"
+        android:minWidth="80dp"
+        android:gravity="center"/>
+
+    <CheckBox
+        android:id="@+id/vnc_autosend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/vnc_send"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="0dp"
+        android:checked="false"
+        android:text="@string/autosend" />
+
+    <Button
+        android:id="@+id/vnc_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/vnc_send"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/vnc_send"
+        android:text="@string/rescan"
+        tools:visibility="invisible" />
+
+    <Button
+        android:id="@+id/vnc_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/vnc_read_barcode"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="0dp"
+        android:text="@string/send"
+        tools:visibility="invisible" />
+
+    <Button
+        android:id="@+id/vnc_read_barcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/vnc_version"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="2dp"
+        android:text="@string/read_barcode" />
+
+    <CheckBox
+        android:id="@+id/vnc_use_flash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/vnc_autosend"
+        android:layout_alignStart="@+id/vnc_autosend"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
+        android:checked="false"
+        android:text="@string/use_flash" />
+
+    <ProgressBar
+        android:id="@+id/vnc_progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/vnc_clear"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="20dp" />
+
+    <ScrollView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_above="@+id/vnc_barcode_type"
+        android:layout_below="@+id/vnc_settings_btn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/border"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/vnc_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="25sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/vnc_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="0dp"
+        android:ems="10"
+        android:text="ver.09" />
+
+</RelativeLayout>
