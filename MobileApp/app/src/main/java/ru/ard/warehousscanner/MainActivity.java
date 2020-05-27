@@ -59,6 +59,7 @@ import org.json.JSONObject;
 import java.util.regex.Pattern;
 
 import ru.ard.scanner.BarcodeCaptureActivity;
+import ru.ard.vnc.VncActivity;
 import ru.ard.warehousscanner.connect.DbService;
 import ru.ard.warehousscanner.listeners.RefusalWorkResponseListener;
 
@@ -112,6 +113,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //задает с какой страницей работем
     public static final String PARAM_START_FROM = "startFrom";
     public static final String START_FROM_MAIN = "startMain";
+    public static final String START_FROM_VNC = "startVNC";
 
     //VIEWS
     private CompoundButton useFlash;
@@ -325,6 +327,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
         settings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         settingsEditor = settings.edit();
 
+        //если последний раз работали с vnc, то запускаем его
+        if (START_FROM_VNC.equals(settings.getString(PARAM_START_FROM, START_FROM_MAIN))) {
+            Intent intent = new Intent(this, VncActivity.class);
+            startActivity(intent);
+        }
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         dbService = new DbService(this);
 
@@ -513,6 +521,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     dbService.skip(id.getText().toString(), settings.getString(PARAM_USER_NAME, ""),
                             responseListenerSkipCard, errorListener);
                 }
+                break;
+
+            case R.id.change_mode:
+                settingsEditor.putString(PARAM_START_FROM, START_FROM_VNC).apply();
+                intent = new Intent(this, VncActivity.class);
+                setState(STATE_SlEEP);
+                startActivity(intent);
                 break;
         }
     }
