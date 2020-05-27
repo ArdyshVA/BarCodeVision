@@ -1,0 +1,2 @@
+rootProject.name='BarCodeVision'
+include ':app'

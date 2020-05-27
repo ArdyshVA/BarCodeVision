@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
+    <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
+    <string name="title_activity_main">Сканер штрих-кодов</string>
+    <string name="barcode_header">Click &quot;Read Barcode&quot; to read a barcode</string>
+    <string name="read_barcode">Сканировать</string>
+    <string name="send">Отправить</string>
+    <string name="rescan">Повторить</string>
+    <string name="reload">Обновить</string>
+    <string name="use_flash">Свет</string>
+    <string name="ip">IP</string>
+    <string name="dialog_ip">Введите IP</string>
+    <string name="dialog_port">Введите порт</string>
+    <string name="dialog_name">Введите: Фамилия И.О.</string>
+    <string name="autosend">Автоотправление</string>
+    <string name="barcode_success">Barcode read successfully</string>
+    <string name="barcode_failure">No barcode captured</string>
+    <string name="barcode_error">"Error reading barcode: %1$s"</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ip_port">ip:port</string>
+    <string name="fio">Ф.И.О.</string>
+    <string name="author">разработчик: Ардышев Владимир</string>
+    <string name="author_email">e-mail: v.a.ardyshev@gmail.com</string>
+    <string name="count">Количество:</string>
+    <string name="mode_vnc">VNC</string>
+    <string name="mode_barcode">ШК</string>
+
+    <string name="vnc_error_connection">Connection Error:</string>
+    <string name="vnc_error_host_ko">Unknown host: Unable to find the VNC server configured, so the connection is impossible. Maybe the VNC server IP isn\'t right.</string>
+    <string name="vnc_error_transport">Transport Connection Error:</string>
+    <string name="vnc_error_unsopported_protocol">Unsupported Protocol Version:</string>
+    <string name="vnc_error_unsopported_security">Unsupported Security Type:</string>
+    <string name="vnc_error_password_ko">Authentication Failed: VNC server doesn\'t has the same password that your mobile device</string>
+    <string name="port">порт</string>
+    <string name="password">пароль</string>
+    <string name="back">Назад</string>
+
+</resources>
