@@ -20,6 +20,7 @@ require_once 'connectDB.php';
  *	get_record - выдать новую карточку, пометив в бд, как "В работе"
  *	put_record_data - положить информацию в бд, доп параметры: id - идентификатор 1С, barcode - код штрихкода, codetype - тип штрихкода
  *  refusal_of_work - отменить у карточки состояние "В работе", доп параметр: id - идентификатор 1С
+ *  get_cards_count - узнать количество оставшейся работы
  *  skip_card - пропустить карточку
  */
 
@@ -61,17 +62,54 @@ else
 			}
 		}
 		
+		//выдает количество карточек к работе
+		if (filter_input(INPUT_POST,"action") === 'get_cards_count')
+        {
+			$query = "SELECT COUNT(*) FROM `bar_codes` WHERE (`barcode` IS NULL OR `barcode` = '') AND `inwork` = 0 AND `worknow` = 1";
+			$result = mysqli_query($link, $query);
+			$records = mysqli_fetch_all($result);
+			$answer["success"] = true;
+			$answer["records_count"] = $records[0][0];
+		}
+		
 		//положить информацию в бд, доп параметры: id - идентификатор 1С, barcode - код штрихкода, codetype - тип штрихкода
 		if (
 			filter_input(INPUT_POST,"action") === 'put_record_data' && 
 			filter_input(INPUT_POST,"id") !== null && 
 			filter_input(INPUT_POST,"barcode")!==null &&
-			filter_input(INPUT_POST,"author") !== null) 		
+			filter_input(INPUT_POST,"author") !== null) 
+			//filter_input(INPUT_POST,"imei") !== null && 
+			//filter_input(INPUT_POST,"phone_number") !== null)			
 		{		    	
 			$id = filter_input(INPUT_POST,"id");
 			$barcode = filter_input(INPUT_POST,"barcode");
 			$codetype = filter_input(INPUT_POST,"codetype");
-			$author = filter_input(INPUT_POST,"author");	
+			$author = filter_input(INPUT_POST,"author");
+			
+			/*
+			$imei = filter_input(INPUT_POST,"imei");
+			$phone_number = filter_input(INPUT_POST,"phone_number");		
+			
+			//проверяем есть ли у нас такой юзер в базе
+			$query = "SELECT `id` FROM `authors` WHERE `imei` = '$imei'";
+			$result = mysqli_query($link, $query);
+			$records = mysqli_fetch_all($result);
+			
+			$author_id = -1;
+			if (count($records) > 0) {
+				//такой пользователь есть
+				$author_id = $records[0][0];
+			} else {
+				//создается новый пользователь
+				$query = "INSERT INTO `authors` (`imei`, `phone_number`) VALUES ('$imei', '$phone_number')";
+				$result = mysqli_query($link, $query);
+				
+				$author_id = mysqli_insert_id($link);				
+				$author_id = 1;
+			}
+			
+			$query = "UPDATE `bar_codes` SET `barcode` = '$barcode', `codetype` = '$codetype', `inwork` = 0, `author_id` = $author_id, `update_time` = now() WHERE `id` = '$id'";
+			*/
 			
 			//проверяем, что в базе не было такого штрихкода
 			$query = "SELECT COUNT(*) FROM `bar_codes` WHERE `barcode` = '$barcode' AND `codetype` = '$codetype'";
@@ -84,7 +122,9 @@ else
 			} else {
 				$answer["success"] = false;
 				$answer["reason"] = "barcode_is_already_exists";
-			}					
+			}
+			
+			
 			
 			
 		} else if (filter_input(INPUT_POST,"action") === 'put_record_data'){
@@ -99,7 +139,17 @@ else
 			if (filter_input(INPUT_POST,"author") === null) {
 				$answer["success"] = false;
 				$answer["reason"] = "empty_author";
-			}			
+			}
+			/*
+			if (filter_input(INPUT_POST,"imei") === null) {
+				$answer["success"] = false;
+				$answer["reason"] = "empty_imei";
+			}
+			if (filter_input(INPUT_POST,"phone_number") === null) {
+				$answer["success"] = false;
+				$answer["reason"] = "empty_phone_number";
+			}
+			*/			
 		}
 		
 		//отменить у карточки состояние "В работе", доп параметр: id - идентификатор 1С
