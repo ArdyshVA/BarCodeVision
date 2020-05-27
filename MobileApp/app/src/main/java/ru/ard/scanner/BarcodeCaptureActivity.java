@@ -113,17 +113,6 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
 
         mPreview = (CameraSourcePreview) findViewById(R.id.preview);
         mGraphicOverlay = (GraphicOverlay<BarcodeGraphic>) findViewById(R.id.graphicOverlay);
-        //задаем обработчик, который автоматически иметирует нажатие, когда появилась какая-то графика
-        mGraphicOverlay.registerDrawEvent(new Event() {
-            @Override
-            public void process() {
-                if (!wasSound) {
-                    wasSound = true;
-                    soundPool.play(soundId, 1, 1, 0, 0, 1);
-                    onTap(0, 0);
-                }
-            }
-        });
 
         // read parameters from the intent used to launch the activity.
         boolean useFlash = getIntent().getBooleanExtra(UseFlash, false);
@@ -413,6 +402,10 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
         }
 
         if (best != null) {
+            if (!wasSound) {
+                wasSound = true;
+                soundPool.play(soundId, 1, 1, 0, 0, 1);
+            }
             Intent data = new Intent();
             data.putExtra(BarcodeObject, best);
             setResult(CommonStatusCodes.SUCCESS, data);
