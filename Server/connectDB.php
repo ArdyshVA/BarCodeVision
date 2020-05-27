@@ -2,8 +2,8 @@
 
 $mysql_host = 'localhost'; // sql сервер
 $mysql_user = 'root'; // пользователь
-$mysql_password = ''; // пароль
-$mysql_database = 'BarCodes'; // имя базы данных 
+$mysql_password = 'HardPass123'; // пароль
+$mysql_database = 'BarCodesDB'; // имя базы данных 
 
 $link = mysqli_connect($mysql_host,$mysql_user,$mysql_password,$mysql_database);
 
