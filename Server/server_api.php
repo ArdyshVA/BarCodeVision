@@ -19,6 +19,7 @@ require_once 'connectDB.php';
 /*     
  *	get_record - выдать новую карточку, пометив в бд, как "В работе"
  *	put_record_data - положить информацию в бд, доп параметры: id - идентификатор 1С, barcode - код штрихкода, codetype - тип штрихкода
+ *  refusal_of_work - отменить у карточки состояние "В работе", доп параметр: id - идентификатор 1С
  *  skip_card - пропустить карточку
  */
 
@@ -99,7 +100,22 @@ else
 				$answer["success"] = false;
 				$answer["reason"] = "empty_author";
 			}			
-		}		
+		}
+		
+		//отменить у карточки состояние "В работе", доп параметр: id - идентификатор 1С
+		if (filter_input(INPUT_POST,"action") === 'refusal_of_work' && filter_input(INPUT_POST,"id") !== null)
+        {
+			$id = filter_input(INPUT_POST,"id");
+			$query = "UPDATE `bar_codes` SET `inwork` = 0 WHERE `id` = '$id'";
+			$result = mysqli_query($link, $query);
+			
+			$answer["success"] = true;
+		} else if (filter_input(INPUT_POST,"action") === 'refusal_of_work'){
+			if (filter_input(INPUT_POST,"id") == null) {
+				$answer["success"] = false;
+				$answer["reason"] = "empty_id";
+			}				
+		}
 
 		//пропустить карточку
 		if (filter_input(INPUT_POST,"action") === 'skip_card' && filter_input(INPUT_POST,"id") !== null && filter_input(INPUT_POST,"author") !== null)
